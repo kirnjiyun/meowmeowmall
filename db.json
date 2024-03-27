@@ -1,0 +1,158 @@
+{
+    "products": [
+        {
+            "id": 0,
+            "img": "https://cdn-image02.casetify.com/usr/20244/36710244/~v285/30831360x2_iphone-15__color_pink_16006152.png.1000x1000-w.m80.webp",
+            "title": "핑크 파워 하트 폰케이스",
+            "price": 49900,
+            "new": true,
+            "option": ["아이폰", "아이폰프로", "갤럭시S", "갤럭시울트라"],
+            "type": "디지털"
+        },
+        {
+            "id": 1,
+            "img": "https://cdn-image02.casetify.com/usr/10369/24100369/~v25/25524397x2_iphone13__color_pink_16003366.png.1000x1000-w.m80.webp",
+            "title": "뭉게뭉게 구름 폰케이스",
+            "price": 59900,
+            "new": false,
+            "option": ["아이폰", "아이폰프로", "갤럭시S", "갤럭시울트라"],
+            "type": "디지털"
+        },
+        {
+            "id": 2,
+            "img": "https://image.ohou.se/i/bucketplace-v2-development/uploads/openapi/7903908/1705980858797.jpg?gif=1&w=640&h=640&c=c&webp=1",
+            "title": "사이좋은 모루인형",
+            "price": 14900,
+            "new": true,
+            "option": ["brown", "pink", "white"],
+            "type": "인형"
+        },
+        {
+            "id": 3,
+            "img": "https://m.feelway.com/upfile000/6660/bd338pd6660561691ed4.jpg",
+            "title": "봄을 데려오는 신발",
+            "price": 418900,
+            "new": false,
+            "option": ["S", "M", "L"],
+            "type": "의류"
+        },
+        {
+            "id": 4,
+            "img": "https://image.msscdn.net/images/goods_img/20240102/3771680/3771680_17041769621165_500.jpg",
+            "title": "핑크 하트 가방",
+            "price": 86900,
+            "new": true,
+            "option": ["free"],
+            "type": "의류"
+        },
+        {
+            "id": 5,
+            "img": "https://image.idus.com/image/files/414b9fadc8224fd882dc0de8a4695bee_720.jpg",
+            "title": "투명 헤드셋 블루투스 이어폰 케이스",
+            "price": 8900,
+            "new": false,
+            "option": ["에어팟", "에어팟프로", "버즈라이브", "버즈프로"],
+            "type": "디지털"
+        },
+        {
+            "id": 6,
+            "img": "http://thumbnail.10x10.co.kr/webimage/image/add1_600/310/A003100787_01.jpg?cmd=thumb&w=500&h=500&fit=true&ws=false",
+            "title": "버니 체크 블루투스 이어폰 케이스",
+            "price": 9900,
+            "new": false,
+            "option": ["에어팟", "에어팟프로", "버즈라이브", "버즈프로"],
+            "type": "디지털"
+        },
+        {
+            "id": 7,
+            "img": "https://sitem.ssgcdn.com/57/03/70/item/1000542700357_i1_1100.jpg",
+            "title": "복슬복슬 알파카 인형",
+            "price": 99900,
+            "new": false,
+            "option": ["beige", "brown", "white"],
+            "type": "인형"
+        },
+
+        {
+            "id": 8,
+            "img": "https://image.msscdn.net/images/goods_img/20221005/2838907/2838907_1_500.jpg",
+            "title": "금손 뜨개질 니트",
+            "price": 600900,
+            "new": true,
+            "option": ["S", "M", "L"],
+            "type": "의류"
+        },
+        {
+            "id": 9,
+            "img": "https://image.msscdn.net/images/goods_img/20230525/3326367/3326367_16850043171690_500.jpg",
+            "title": "패치 모자",
+            "price": 129900,
+            "new": true,
+            "option": ["free"],
+            "type": "의류"
+        },
+        {
+            "id": 10,
+            "img": "https://thumbnail.10x10.co.kr/webimage/image/basic600/552/B005527961.jpg?cmd=thumb&w=400&h=400&fit=true&ws=false",
+            "title": "뮤트 핑크 바지",
+            "price": 35900,
+            "new": false,
+            "option": ["S", "M", "L"],
+            "type": "의류"
+        },
+        {
+            "id": 11,
+            "img": "https://image.msscdn.net/images/goods_img/20240104/3776233/3776233_17109936050198_500.jpg",
+            "title": "코지 버드 키링",
+            "price": 12900,
+            "new": true,
+            "option": ["white", "brown", "black"],
+            "type": "키링"
+        },
+        {
+            "id": 12,
+            "img": "https://image.msscdn.net/images/goods_img/20240110/3786821/3786821_17061519205167_500.jpg",
+            "title": "트윈 캣츠 키링",
+            "price": 44900,
+            "new": true,
+            "option": ["free"],
+            "type": "키링"
+        },
+        {
+            "id": 13,
+            "img": "https://image8.coupangcdn.com/image/retail/images/2024/02/28/16/6/de1ca08c-4443-42f1-9c0f-e3bdda78755c.jpg",
+            "title": "든든 모자 모루인형",
+            "price": 8900,
+            "new": false,
+            "option": ["beige", "brown", "black"],
+            "type": "인형"
+        },
+        {
+            "id": 14,
+            "img": "https://cdn-image02.casetify.com/usr/17807/26657807/~v381/25669988x2_iphone-se__color_silver_16006411.png.1000x1000-w.m80.webp",
+            "title": "다이어리 스티커 폰케이스",
+            "price": 13900,
+            "new": false,
+            "option": ["아이폰", "아이폰프로", "갤럭시S", "갤럭시울트라"],
+            "type": "디지털"
+        },
+        {
+            "id": 15,
+            "img": "https://cdn-image02.casetify.com/usr/4787/34787/~v1/32049974_macbook-pro-16-2021_16005647.png.560x560-w.m80.webp",
+            "title": "마멜월드 노트북 케이스",
+            "price": 81900,
+            "new": true,
+            "option": ["맥북에어", "맥북프로", "그램", "울트라북"],
+            "type": "디지털"
+        },
+        {
+            "id": 16,
+            "img": "https://cdn-image02.casetify.com/usr/11785/3671785/~v6182/5755929x2_iphone-15__color_pink_16005961.png.1000x1000-w.m80.webp",
+            "title": "블랙 리본 폰케이스",
+            "price": 10900,
+            "new": false,
+            "option": ["S", "M", "L"],
+            "type": "디지털"
+        }
+    ]
+}
