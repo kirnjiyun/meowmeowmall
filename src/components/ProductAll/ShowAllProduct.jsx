@@ -9,7 +9,9 @@ export default function ShowAllProduct({ searchQuery }) {
 
     const getProducts = async () => {
         try {
-            let response = await fetch("http://localhost:3004/products");
+            let response = await fetch(
+                "https://my-json-server.typicode.com/kirnjiyun/meowmeowmall/products"
+            );
             let data = await response.json();
             setProductList(data);
         } catch (error) {
