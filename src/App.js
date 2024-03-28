@@ -9,7 +9,7 @@ import PrivateRoute from "./route/PrivateRoute.jsx";
 export default function App() {
     const [auth, setAuth] = useState(false);
     const [searchQuery, setSearchQuery] = useState("");
-    const [category, setCategory] = useState(null);
+    const [category, setCategory] = useState("전체보기");
 
     const handleSearch = (keyword) => {
         setSearchQuery(keyword);

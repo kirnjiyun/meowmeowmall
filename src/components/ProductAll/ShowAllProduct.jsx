@@ -25,7 +25,7 @@ export default function ShowAllProduct({ searchQuery, category }) {
 
     const filterProducts = () => {
         let filtered = productList;
-        if (category === "" || category === "전체보기") {
+        if (category == "전체보기") {
             filtered = filtered.filter((product) => product.type !== category);
         } else if (category !== "전체보기" || category !== "") {
             filtered = filtered.filter((product) => product.type == category);
