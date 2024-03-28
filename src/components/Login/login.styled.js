@@ -12,6 +12,13 @@ export const LoginContainer = styled.form`
     margin-right: auto;
     padding: 100px 0;
 `;
+export const P = styled.p`
+    display: block;
+    margin: 0 auto;
+    width: fit-content;
+    color: #5a5a5a;
+    padding-bottom: 50px;
+`;
 export const FormGroup = styled.div`
     margin-bottom: 20px;
     display: flex;

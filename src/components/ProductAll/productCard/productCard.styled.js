@@ -4,8 +4,8 @@ export const ProductCardContainer = styled.div`
     display: flex;
     flex-direction: column;
     padding: 20px;
-    gap: 5px;
     cursor: pointer;
+    gap: 10px;
     transition: transform 0.2s ease;
     &:hover {
         transform: scale(1.1);

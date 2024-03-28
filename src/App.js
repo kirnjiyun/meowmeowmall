@@ -13,9 +13,17 @@ export default function App() {
     const handleSearch = (keyword) => {
         setSearchQuery(keyword);
     };
+    const handleLogout = () => {
+        setAuth(false);
+    };
     return (
         <S.AppContainer>
-            <NavBar onSearch={handleSearch} />
+            <NavBar
+                onSearch={handleSearch}
+                auth={auth}
+                onLogout={handleLogout}
+            />
+
             <Routes>
                 <Route
                     path="/"

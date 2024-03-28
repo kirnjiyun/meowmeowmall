@@ -18,6 +18,7 @@ export default function Login({ setAuth }) {
 
     return (
         <S.LoginContainer onSubmit={(e) => loginUser(e)}>
+            <S.P>상세 정보를 보려면 로그인 해주세요</S.P>
             <S.FormGroup>
                 <S.Label>˖ ࣪⊹˚이메일⁺⊹⋆</S.Label>
                 <S.Input
