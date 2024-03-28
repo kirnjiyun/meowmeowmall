@@ -21,6 +21,13 @@ export const ProductDetailContainer = styled.div`
     flex-direction: row;
     justify-content: center;
     gap: 30px;
+
+    @media (max-width: 768px) {
+        flex-direction: column;
+        align-items: center;
+        margin: 0 20px 0 20px;
+        padding-top: 20px;
+    }
 `;
 export const Img = styled.img`
     aspect-ratio: 1/1;
@@ -29,20 +36,30 @@ export const Img = styled.img`
     min-height: 80px;
     width: min(500px, 100%);
     height: min(500px, 100%);
+    border-radius: 15px;
 `;
-
 export const InfoBox = styled.div`
     width: 40%;
     display: flex;
     flex-direction: column;
     gap: 30px;
     padding-top: 10px;
+
+    @media (max-width: 768px) {
+        width: 80%;
+    }
 `;
 export const Title = styled.p`
     font-size: 32px;
+    @media (max-width: 768px) {
+        font-size: 20px;
+    }
 `;
 export const Price = styled.p`
     font-size: 28px;
+    @media (max-width: 768px) {
+        font-size: 20px;
+    }
 `;
 export const DropdownContainer = styled.div`
     position: relative;
@@ -52,8 +69,13 @@ export const DropdownContainer = styled.div`
     width: 30%;
     min-width: 200px;
     padding-bottom: 16px;
-`;
 
+    @media (max-width: 768px) {
+        width: 60%;
+        font-size: 16px;
+        max-width: 200px;
+    }
+`;
 export const DropdownContent = styled.div`
     position: absolute;
     display: ${(props) => (props.isOpen ? "block" : "none")};
@@ -65,8 +87,11 @@ export const DropdownContent = styled.div`
     box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
     padding: 12px 16px;
     z-index: 1;
-`;
 
+    @media (max-width: 768px) {
+        width: 100%;
+    }
+`;
 export const MenuItem = styled.a`
     color: inherit;
     padding: 12px 16px;
@@ -81,7 +106,6 @@ export const MenuItem = styled.a`
         transform: scale(0.9);
     }
 `;
-
 export const Button = styled.button`
     font-size: 16px;
     padding: 15px 0;
@@ -94,5 +118,10 @@ export const Button = styled.button`
     background-color: rgba(255, 20, 147, 0.8);
     &:active {
         transform: scale(0.9);
+    }
+
+    @media (max-width: 768px) {
+        margin: 30px 10%;
+        padding: 10px 0;
     }
 `;
