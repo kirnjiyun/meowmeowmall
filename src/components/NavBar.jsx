@@ -63,14 +63,14 @@ export default function NavBar({ onSearch, auth, onLogout, onSelect }) {
             <S.Div3>
                 <S.Ul>
                     {menuList.map((menu) => (
-                        <S.Li key={menu}>
+                        <li key={menu}>
                             <S.Button
                                 onClick={select(menu)}
                                 isSelected={menu === currentCategory}
                             >
                                 ☾{menu}☽
                             </S.Button>
-                        </S.Li>
+                        </li>
                     ))}
                 </S.Ul>
                 <S.Div4>

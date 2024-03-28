@@ -10,6 +10,11 @@ export const ProductCardContainer = styled.div`
     &:hover {
         transform: scale(1.1);
     }
+
+    @media (max-width: 768px) {
+        padding: 10px;
+        gap: 5px;
+    }
 `;
 
 export const Img = styled.img`
@@ -17,14 +22,31 @@ export const Img = styled.img`
     aspect-ratio: 1/1;
     object-fit: cover;
     border-radius: 15px;
+
+    @media (max-width: 768px) {
+        border-radius: 10px; /
+    }
 `;
 
 export const Title = styled.p`
     font-size: 18px;
+    line-height: 1.2;
+
+    @media (max-width: 768px) {
+        font-size: 12px;
+    }
 `;
 export const Price = styled.p`
     font-size: 18px;
+    line-height: 1.2;
+    @media (max-width: 768px) {
+        font-size: 12px;
+    }
 `;
 export const New = styled.p`
     font-size: 12px;
+    line-height: 1.2;
+    @media (max-width: 768px) {
+        font-size: 8px;
+    }
 `;
