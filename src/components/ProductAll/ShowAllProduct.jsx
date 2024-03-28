@@ -4,7 +4,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import { Container, Row, Col } from "react-bootstrap";
 import ProductCard from "./productCard/ProductCard";
 
-export default function ShowAllProduct({ searchQuery }) {
+export default function ShowAllProduct({ searchQuery, category }) {
     const [productList, setProductList] = useState([]);
 
     const getProducts = async () => {
@@ -24,20 +24,31 @@ export default function ShowAllProduct({ searchQuery }) {
     }, []);
 
     const filterProducts = () => {
-        if (searchQuery === "") {
-            return productList;
-        } else {
-            return productList.filter((product) =>
+        let filtered = productList;
+        if (category === "" || category === "전체보기") {
+            filtered = filtered.filter((product) => product.type !== category);
+        } else if (category !== "전체보기" || category !== "") {
+            filtered = filtered.filter((product) => product.type == category);
+        }
+        return filtered;
+    };
+
+    const searchProducts = (products) => {
+        if (searchQuery !== "") {
+            return products.filter((product) =>
                 product.title.toLowerCase().includes(searchQuery.toLowerCase())
             );
         }
+        return products;
     };
+
+    const displayedProducts = searchProducts(filterProducts());
 
     return (
         <S.AllContainer>
             <Container>
                 <Row>
-                    {filterProducts().map((item) => (
+                    {displayedProducts.map((item) => (
                         <Col lg={3} md={4} xs={6} key={item.id}>
                             <ProductCard item={item} />
                         </Col>

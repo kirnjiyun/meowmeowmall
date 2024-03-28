@@ -9,6 +9,7 @@ import PrivateRoute from "./route/PrivateRoute.jsx";
 export default function App() {
     const [auth, setAuth] = useState(false);
     const [searchQuery, setSearchQuery] = useState("");
+    const [category, setCategory] = useState(null);
 
     const handleSearch = (keyword) => {
         setSearchQuery(keyword);
@@ -16,18 +17,28 @@ export default function App() {
     const handleLogout = () => {
         setAuth(false);
     };
+    const handleCategory = (type) => {
+        setCategory(type);
+        console.log("앱으로 올라온", type);
+    };
     return (
         <S.AppContainer>
             <NavBar
                 onSearch={handleSearch}
                 auth={auth}
                 onLogout={handleLogout}
+                onSelect={handleCategory}
             />
 
             <Routes>
                 <Route
                     path="/"
-                    element={<ProductAll searchQuery={searchQuery} />}
+                    element={
+                        <ProductAll
+                            searchQuery={searchQuery}
+                            category={category}
+                        />
+                    }
                 />
                 <Route
                     path="/login"
