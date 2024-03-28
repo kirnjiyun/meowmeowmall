@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useRef } from "react";
 import UserIcon from "../images/icon-user.svg";
 import Logo from "../images/meowmeow.svg";
 import * as S from "./navBar.styled";
@@ -9,13 +9,16 @@ export default function NavBar({ onSearch, auth, onLogout, onSelect }) {
     const menuList = ["전체보기", "인형", "키링", "의류", "디지털"];
     const navigate = useNavigate();
     const location = useLocation();
+    const searchInputRef = useRef(null);
 
     const gotoLogin = () => {
         navigate("/login");
+        clearSearchState();
     };
 
     const gotoHome = () => {
         navigate("/");
+        clearSearchState();
     };
 
     const search = (event) => {
@@ -30,6 +33,7 @@ export default function NavBar({ onSearch, auth, onLogout, onSelect }) {
         return () => {
             onSelect(menu);
             navigate(`/?category=${menu}`);
+            clearSearchState();
         };
     };
 
@@ -39,6 +43,13 @@ export default function NavBar({ onSearch, auth, onLogout, onSelect }) {
     };
 
     const currentCategory = getCurrentCategory();
+
+    const clearSearchState = () => {
+        if (searchInputRef.current) {
+            searchInputRef.current.value = "";
+        }
+        onSearch(""); // 검색 키워드 초기화
+    };
 
     return (
         <S.NavBarLayout>
@@ -65,7 +76,11 @@ export default function NavBar({ onSearch, auth, onLogout, onSelect }) {
                 <S.Div4>
                     <S.SearchBar>
                         <S.Img2 src={SearchIcon} alt="SearchIcon" />
-                        <S.Input type="text" onKeyDown={search} />
+                        <S.Input
+                            type="text"
+                            onKeyDown={search}
+                            ref={searchInputRef}
+                        />
                     </S.SearchBar>
                 </S.Div4>
             </S.Div3>
