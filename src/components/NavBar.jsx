@@ -3,14 +3,17 @@ import UserIcon from "../images/icon-user.svg";
 import Logo from "../images/meowmeow.svg";
 import * as S from "./navBar.styled";
 import SearchIcon from "../images/icon-search.svg";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 
 export default function NavBar({ onSearch, auth, onLogout, onSelect }) {
     const menuList = ["전체보기", "인형", "키링", "의류", "디지털"];
     const navigate = useNavigate();
+    const location = useLocation();
+
     const gotoLogin = () => {
         navigate("/login");
     };
+
     const gotoHome = () => {
         navigate("/");
     };
@@ -19,15 +22,23 @@ export default function NavBar({ onSearch, auth, onLogout, onSelect }) {
         if (event.key === "Enter") {
             let keyword = event.target.value;
             onSearch(keyword);
-            navigate(`/?q=${keyword}`);
+            navigate(`/?q=${keyword}&category=${getCurrentCategory()}`);
         }
     };
+
     const select = (menu) => {
         return () => {
             onSelect(menu);
             navigate(`/?category=${menu}`);
         };
     };
+
+    const getCurrentCategory = () => {
+        const searchParams = new URLSearchParams(location.search);
+        return searchParams.get("category") || "";
+    };
+
+    const currentCategory = getCurrentCategory();
 
     return (
         <S.NavBarLayout>
@@ -42,7 +53,12 @@ export default function NavBar({ onSearch, auth, onLogout, onSelect }) {
                 <S.Ul>
                     {menuList.map((menu) => (
                         <S.Li key={menu}>
-                            <S.Button onClick={select(menu)}>☾{menu}☽</S.Button>
+                            <S.Button
+                                onClick={select(menu)}
+                                isSelected={menu === currentCategory}
+                            >
+                                ☾{menu}☽
+                            </S.Button>
                         </S.Li>
                     ))}
                 </S.Ul>

@@ -56,6 +56,8 @@ export const Button = styled.button`
     &:hover {
         text-shadow: 0px 0px 4px #f5c1d0;
     }
+    text-shadow: ${(props) =>
+        props.isSelected ? "0px 0px 4px #f5c1d0" : "none"};
 `;
 
 export const SearchBar = styled.div`
