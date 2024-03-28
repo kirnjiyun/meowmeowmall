@@ -6,11 +6,13 @@ export default function ProductCard({ item }) {
     const showDetail = () => {
         navigate(`/product/${item.id}`);
     };
+    const price = item?.price;
+    const formattedPrice = price ? price.toLocaleString() : "";
     return (
         <S.ProductCardContainer onClick={showDetail}>
             <S.Img src={item?.img} />
             <S.Title>{item?.title}</S.Title>
-            <S.Price>{item?.price}</S.Price>
+            <S.Price>{formattedPrice}</S.Price>
             <S.New>{item.new && <S.New>NEW</S.New>}</S.New>
         </S.ProductCardContainer>
     );
