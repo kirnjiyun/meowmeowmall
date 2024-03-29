@@ -123,6 +123,7 @@ export const HamburgerMenu = styled.div`
 `;
 
 export const MobileMenu = styled.div`
+    display: ${({ isOpen }) => (isOpen ? "block" : "none")};
     position: absolute;
     top: 160px;
     margin: 0 auto;

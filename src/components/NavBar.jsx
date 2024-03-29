@@ -12,18 +12,30 @@ export default function NavBar({ onSearch, auth, onLogout, onSelect }) {
     const searchInputRef = useRef(null);
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
     const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
-
+    const menuRef = useRef(null);
     useEffect(() => {
         const handleResize = () => {
             setIsMobile(window.innerWidth <= 768);
         };
-        window.addEventListener("resize", handleResize);
-        return () => window.removeEventListener("resize", handleResize);
-    }, []);
 
+        const handleClick = (event) => {
+            if (isMobileMenuOpen && !menuRef.current.contains(event.target)) {
+                setIsMobileMenuOpen(false);
+            }
+        };
+
+        window.addEventListener("resize", handleResize);
+        window.addEventListener("click", handleClick);
+
+        return () => {
+            window.removeEventListener("resize", handleResize);
+            window.removeEventListener("click", handleClick);
+        };
+    }, []);
     const toggleMobileMenu = () => {
-        setIsMobileMenuOpen(!isMobileMenuOpen);
+        setIsMobileMenuOpen((prevState) => !prevState);
     };
+
     const gotoLogin = () => {
         navigate("/login");
         clearSearchState();
@@ -32,6 +44,7 @@ export default function NavBar({ onSearch, auth, onLogout, onSelect }) {
     const gotoHome = () => {
         navigate("/");
         clearSearchState();
+        onSelect("");
     };
 
     const search = (event) => {
@@ -61,7 +74,7 @@ export default function NavBar({ onSearch, auth, onLogout, onSelect }) {
         if (searchInputRef.current) {
             searchInputRef.current.value = "";
         }
-        onSearch(""); // 검색 키워드 초기화
+        onSearch("");
     };
 
     return (
@@ -79,8 +92,11 @@ export default function NavBar({ onSearch, auth, onLogout, onSelect }) {
                         <S.HamburgerMenu onClick={toggleMobileMenu}>
                             &#9776;
                         </S.HamburgerMenu>
-                        {isMobileMenuOpen && (
-                            <S.MobileMenu>
+                        {isMobile && (
+                            <S.MobileMenu
+                                ref={menuRef}
+                                isOpen={isMobileMenuOpen}
+                            >
                                 <S.Ul>
                                     {menuList.map((menu) => (
                                         <li key={menu}>
