@@ -1,16 +1,18 @@
 import React, { useState } from "react";
 import * as S from "./login.styled";
 import { useNavigate } from "react-router-dom";
-
+import { UseDispatch, useDispatch } from "react-redux";
+import { authenticateAtcion } from "../../redux/actions/authenticateAction";
 export default function Login({ setAuth }) {
     const navigate = useNavigate();
+    const dispatch = useDispatch();
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
 
     const loginUser = (e) => {
         e.preventDefault();
         console.log("login user function");
-        setAuth(true);
+        dispatch(authenticateAtcion.login(email, password));
         navigate("/");
     };
 

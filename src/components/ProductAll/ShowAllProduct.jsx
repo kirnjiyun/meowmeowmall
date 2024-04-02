@@ -8,7 +8,7 @@ import { productAction } from "../../redux/actions/productAction"; // productAct
 
 export default function ShowAllProduct({ searchQuery, category }) {
     const dispatch = useDispatch();
-    const productList = useSelector((state) => state.products);
+    const productList = useSelector((state) => state.product.products);
 
     useEffect(() => {
         dispatch(productAction.getProducts()); // productAction 객체에서 getProducts 액션 가져오기
