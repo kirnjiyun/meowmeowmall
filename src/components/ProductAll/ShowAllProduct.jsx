@@ -3,28 +3,19 @@ import * as S from "./showAllProduct.styled";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { Container, Row, Col } from "react-bootstrap";
 import ProductCard from "./productCard/ProductCard";
+import { useDispatch, useSelector } from "react-redux";
+import { productAction } from "../../redux/actions/productAction"; // productAction 객체 가져오기
 
 export default function ShowAllProduct({ searchQuery, category }) {
-    const [productList, setProductList] = useState([]);
-
-    const getProducts = async () => {
-        try {
-            let response = await fetch(
-                "https://my-json-server.typicode.com/kirnjiyun/meowmeowmall/products"
-            );
-            let data = await response.json();
-            setProductList(data);
-        } catch (error) {
-            console.error("상품 가져오기 실패:", error);
-        }
-    };
+    const dispatch = useDispatch();
+    const productList = useSelector((state) => state.products);
 
     useEffect(() => {
-        getProducts();
-    }, []);
+        dispatch(productAction.getProducts()); // productAction 객체에서 getProducts 액션 가져오기
+    }, [dispatch]);
 
     const filterProducts = () => {
-        let filtered = productList;
+        let filtered = productList || [];
         if (category && category !== "전체보기") {
             filtered = filtered.filter((product) => product.type === category);
         }
@@ -46,11 +37,15 @@ export default function ShowAllProduct({ searchQuery, category }) {
         <S.AllContainer>
             <Container>
                 <Row>
-                    {displayedProducts.map((item) => (
-                        <Col lg={3} md={4} sm={6} xs={12} key={item.id}>
-                            <ProductCard item={item} />
-                        </Col>
-                    ))}
+                    {displayedProducts && displayedProducts.length > 0 ? (
+                        displayedProducts.map((item) => (
+                            <Col lg={3} md={4} sm={6} xs={12} key={item.id}>
+                                <ProductCard item={item} />
+                            </Col>
+                        ))
+                    ) : (
+                        <div>No products found.</div>
+                    )}
                 </Row>
             </Container>
         </S.AllContainer>
