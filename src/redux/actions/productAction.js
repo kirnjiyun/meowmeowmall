@@ -1,3 +1,5 @@
+import { productActions } from "../reducers/productReducer";
+
 function getProducts() {
     return async (dispatch, getState) => {
         try {
@@ -6,7 +8,8 @@ function getProducts() {
             );
             let data = await response.json();
 
-            dispatch({ type: "GET_PRODUCT_SUCCESS", payload: { data } });
+            // dispatch({ type: "GET_PRODUCT_SUCCESS", payload: { data } });
+            dispatch(productActions.getProductSuccess({ data }));
         } catch (error) {
             console.error("상품 가져오기 실패:", error);
         }
