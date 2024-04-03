@@ -4,14 +4,14 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import { Container, Row, Col } from "react-bootstrap";
 import ProductCard from "./productCard/ProductCard";
 import { useDispatch, useSelector } from "react-redux";
-import { productAction } from "../../redux/actions/productAction"; // productAction 객체 가져오기
+import { fetchProducts } from "../../redux/reducers/productSlice";
 
 export default function ShowAllProduct({ searchQuery, category }) {
     const dispatch = useDispatch();
     const productList = useSelector((state) => state.product.products);
 
     useEffect(() => {
-        dispatch(productAction.getProducts()); // productAction 객체에서 getProducts 액션 가져오기
+        dispatch(fetchProducts());
     }, [dispatch]);
 
     const filterProducts = () => {
