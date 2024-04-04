@@ -1,12 +1,15 @@
 import React, { useEffect, useState } from "react";
 import * as S from "./productDetail.styled";
 import { useParams } from "react-router-dom";
+import { useDispatch, useSelector } from "react-redux";
+import { fetchProductDetail } from "../../redux/reducers/productSlice";
 
 export default function ProductDetail() {
     const [selected, setSelected] = useState(null);
     const [isOpen, setIsOpen] = useState(false);
-    let { id } = useParams();
-    const [product, setProduct] = useState(null);
+    const { id } = useParams();
+    const dispatch = useDispatch();
+    const { selectedProduct, error } = useSelector((state) => state.product);
 
     const handleClick = (option) => {
         setSelected(option);
@@ -14,30 +17,26 @@ export default function ProductDetail() {
 
     const toggleDropdown = () => setIsOpen(!isOpen);
 
-    const getDetail = async () => {
-        let url = `https://my-json-server.typicode.com/kirnjiyun/meowmeowmall/products/${id}`;
-        let response = await fetch(url);
-        let data = await response.json();
-        setProduct(data);
-    };
-
     useEffect(() => {
-        getDetail();
-    }, []);
+        dispatch(fetchProductDetail(id));
+    }, [dispatch, id]);
+
+    if (error) {
+        return <div>Error: {error}</div>;
+    }
 
     return (
         <S.ProductDetailContainer>
-            {product && <S.Img src={product.img} />}
-
-            {product && (
+            {selectedProduct && <S.Img src={selectedProduct.img} />}
+            {selectedProduct && (
                 <S.InfoBox>
-                    <S.Title>{product.title}</S.Title>
-                    <S.Price>{product.price.toLocaleString()}</S.Price>
-                    {product.new && <S.New>NEW</S.New>}
+                    <S.Title>{selectedProduct.title}</S.Title>
+                    <S.Price>{selectedProduct.price.toLocaleString()}</S.Price>
+                    {selectedProduct.new && <S.New>NEW</S.New>}
                     <S.DropdownContainer onClick={toggleDropdown}>
                         <span>{selected || "옵션 선택"}</span>
                         <S.DropdownContent isOpen={isOpen}>
-                            {product.option.map((option, index) => (
+                            {selectedProduct.option.map((option, index) => (
                                 <S.MenuItem
                                     key={index}
                                     onClick={() => handleClick(option)}

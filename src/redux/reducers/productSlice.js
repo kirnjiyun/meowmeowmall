@@ -1,20 +1,3 @@
-// import { createSlice } from "@reduxjs/toolkit";
-
-// const initialState = { products: [] };
-
-// const productSlice = (state = initialState, action) => {
-//     const { type, payload } = action;
-
-//     switch (type) {
-//         case "GET_PRODUCT_SUCCESS":
-//             return { ...state, products: payload.data };
-//         default:
-//             return state;
-//     }
-// };
-
-// export default productSlice;
-
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 
 // 비동기 액션 생성 함수
@@ -29,9 +12,20 @@ export const fetchProducts = createAsyncThunk(
     }
 );
 
+export const fetchProductDetail = createAsyncThunk(
+    "product/fetchProductDetail",
+    async (id) => {
+        const response = await fetch(
+            `https://my-json-server.typicode.com/kirnjiyun/meowmeowmall/products/${id}`
+        );
+        const data = await response.json();
+        return data;
+    }
+);
+
 const initialState = {
     products: [],
-
+    selectedProduct: null,
     error: null,
 };
 
@@ -43,9 +37,16 @@ const productSlice = createSlice({
         builder
             .addCase(fetchProducts.pending, (state) => {})
             .addCase(fetchProducts.fulfilled, (state, action) => {
-                state.products = action.payload.data;
+                state.products = action.payload;
             })
             .addCase(fetchProducts.rejected, (state, action) => {
+                state.error = action.error.message;
+            })
+            .addCase(fetchProductDetail.pending, (state) => {})
+            .addCase(fetchProductDetail.fulfilled, (state, action) => {
+                state.selectedProduct = action.payload;
+            })
+            .addCase(fetchProductDetail.rejected, (state, action) => {
                 state.error = action.error.message;
             });
     },
