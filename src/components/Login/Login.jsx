@@ -1,19 +1,25 @@
 import React, { useState } from "react";
 import * as S from "./login.styled";
 import { useNavigate } from "react-router-dom";
-import { UseDispatch, useDispatch } from "react-redux";
-import { authenticateAtcion } from "../../redux/actions/authenticateAction";
-export default function Login({ setAuth }) {
+import { useDispatch } from "react-redux";
+import { login } from "../../redux/reducers/authenticateSlice";
+
+export default function Login() {
     const navigate = useNavigate();
     const dispatch = useDispatch();
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
 
-    const loginUser = (e) => {
+    const loginUser = async (e) => {
         e.preventDefault();
         console.log("login user function");
-        dispatch(authenticateAtcion.login(email, password));
-        navigate("/");
+        try {
+            await dispatch(login({ email, password })).unwrap();
+            console.log("로그인 성공");
+            navigate("/");
+        } catch (error) {
+            console.log("로그인 실패", error);
+        }
     };
 
     const isFormValid = email.length > 0 && password.length > 0;

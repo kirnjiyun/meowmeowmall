@@ -5,7 +5,7 @@ import { Container, Row, Col } from "react-bootstrap";
 import ProductCard from "./productCard/ProductCard";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchProducts } from "../../redux/reducers/productSlice";
-import { fetchProductDetail } from "../../redux/reducers/productSlice";
+
 export default function ShowAllProduct({ searchQuery, category }) {
     const dispatch = useDispatch();
     const productList = useSelector((state) => state.product.products);
