@@ -4,7 +4,6 @@ import Logo from "../images/meowmeow.svg";
 import * as S from "./navBar.styled";
 import SearchIcon from "../images/icon-search.svg";
 import { useNavigate, useLocation } from "react-router-dom";
-
 export default function NavBar({ onSearch, auth, onLogout, onSelect }) {
     const menuList = ["전체보기", "인형", "키링", "의류", "디지털"];
     const navigate = useNavigate();
@@ -13,6 +12,7 @@ export default function NavBar({ onSearch, auth, onLogout, onSelect }) {
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
     const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
     const menuRef = useRef(null);
+
     useEffect(() => {
         const handleResize = () => {
             setIsMobile(window.innerWidth <= 768);
@@ -38,6 +38,11 @@ export default function NavBar({ onSearch, auth, onLogout, onSelect }) {
 
     const gotoLogin = () => {
         navigate("/login");
+        clearSearchState();
+    };
+
+    const gotoSignUp = () => {
+        navigate("/signup");
         clearSearchState();
     };
 
@@ -79,9 +84,24 @@ export default function NavBar({ onSearch, auth, onLogout, onSelect }) {
 
     return (
         <S.NavBarLayout>
-            <S.Div1 onClick={auth ? onLogout : gotoLogin}>
-                <S.Img src={UserIcon} alt="User Icon" />
-                <S.Content>{auth ? "로그아웃" : "로그인"}</S.Content>{" "}
+            <S.Div1>
+                {auth ? (
+                    <S.Button onClick={onLogout}>
+                        <S.Img src={UserIcon} alt="User Icon" />
+                        <S.Content>로그아웃</S.Content>
+                    </S.Button>
+                ) : (
+                    <>
+                        <S.Button onClick={gotoLogin}>
+                            <S.Img src={UserIcon} alt="User Icon" />
+                            <S.Content>로그인</S.Content>
+                        </S.Button>
+                        <S.Button onClick={gotoSignUp}>
+                            <S.Img src={UserIcon} alt="User Icon" />
+                            <S.Content>회원가입</S.Content>
+                        </S.Button>
+                    </>
+                )}
             </S.Div1>
             <S.Div2>
                 <S.Logo src={Logo} alt="meowmeow" onClick={gotoHome} />
