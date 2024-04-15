@@ -113,15 +113,15 @@ export const Input = styled.input`
     }
 `;
 export const HamburgerMenu = styled.div`
-    display: inline-block;
+    display: none;
     cursor: pointer;
     font-size: 1.5rem;
     margin-right: 1rem;
-    @media (min-width: 769px) {
-        display: none;
+    user-select: none;
+    @media (max-width: 768px) {
+        display: block;
     }
 `;
-
 export const MobileMenu = styled.div`
     display: ${({ isOpen }) => (isOpen ? "block" : "none")};
     position: absolute;
@@ -144,6 +144,8 @@ export const Ul = styled.ul`
     height: 30px;
     grid-column: 2 / 3;
     @media (max-width: 768px) {
+        display: ${({ isMobile, isOpen }) =>
+            isMobile && isOpen ? "flex" : "none"};
         flex-direction: column;
         justify-content: center;
         align-items: center;

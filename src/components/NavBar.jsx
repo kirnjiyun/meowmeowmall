@@ -12,26 +12,38 @@ export default function NavBar({ onSearch, user, onLogout, onSelect }) {
     const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
     const [isMobile, setIsMobile] = useState(window.innerWidth <= 768);
     const menuRef = useRef(null);
-
     useEffect(() => {
         const handleResize = () => {
             setIsMobile(window.innerWidth <= 768);
         };
 
+        window.addEventListener("resize", handleResize);
+
+        return () => {
+            window.removeEventListener("resize", handleResize);
+        };
+    }, []);
+    useEffect(() => {
         const handleClick = (event) => {
-            if (isMobileMenuOpen && !menuRef.current.contains(event.target)) {
+            if (
+                isMobileMenuOpen &&
+                menuRef.current &&
+                !menuRef.current.contains(event.target)
+            ) {
                 setIsMobileMenuOpen(false);
             }
         };
 
-        window.addEventListener("resize", handleResize);
-        window.addEventListener("click", handleClick);
+        if (isMobileMenuOpen) {
+            window.addEventListener("click", handleClick);
+            console.log("first");
+        }
 
         return () => {
-            window.removeEventListener("resize", handleResize);
             window.removeEventListener("click", handleClick);
         };
-    }, []);
+    }, [isMobileMenuOpen]);
+
     const toggleMobileMenu = () => {
         setIsMobileMenuOpen((prevState) => !prevState);
     };
@@ -107,33 +119,28 @@ export default function NavBar({ onSearch, user, onLogout, onSelect }) {
                 <S.Logo src={Logo} alt="meowmeow" onClick={gotoHome} />
             </S.Div2>
             <S.Div3>
+                <S.HamburgerMenu onClick={toggleMobileMenu}>
+                    &#9776;
+                </S.HamburgerMenu>
                 {isMobile ? (
-                    <>
-                        <S.HamburgerMenu onClick={toggleMobileMenu}>
-                            &#9776;
-                        </S.HamburgerMenu>
-                        {isMobile && (
-                            <S.MobileMenu
-                                ref={menuRef}
-                                isOpen={isMobileMenuOpen}
-                            >
-                                <S.Ul>
-                                    {menuList.map((menu) => (
-                                        <li key={menu}>
-                                            <S.Button
-                                                onClick={select(menu)}
-                                                isSelected={
-                                                    menu === currentCategory
-                                                }
-                                            >
-                                                ☾{menu}☽
-                                            </S.Button>
-                                        </li>
-                                    ))}
-                                </S.Ul>
-                            </S.MobileMenu>
-                        )}
-                    </>
+                    isMobileMenuOpen && (
+                        <S.MobileMenu ref={menuRef}>
+                            <S.Ul>
+                                {menuList.map((menu) => (
+                                    <li key={menu}>
+                                        <S.Button
+                                            onClick={select(menu)}
+                                            isSelected={
+                                                menu === currentCategory
+                                            }
+                                        >
+                                            ☾{menu}☽
+                                        </S.Button>
+                                    </li>
+                                ))}
+                            </S.Ul>
+                        </S.MobileMenu>
+                    )
                 ) : (
                     <S.Ul>
                         {menuList.map((menu) => (

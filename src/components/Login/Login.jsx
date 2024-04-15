@@ -14,8 +14,10 @@ export default function Login() {
         try {
             await signInWithEmailAndPassword(auth, email, password);
             navigate("/");
+            alert("반갑습니다.");
         } catch (error) {
             console.error("로그인 실패:", error);
+            alert("로그인에 실패했습니다. 이메일과 비밀번호를 확인해주세요.");
         }
     };
 
@@ -42,7 +44,6 @@ export default function Login() {
                     onChange={(e) => setPassword(e.target.value)}
                 />
             </S.FormGroup>
-
             <S.Button type="submit" disabled={!isFormValid}>
                 로그인
             </S.Button>

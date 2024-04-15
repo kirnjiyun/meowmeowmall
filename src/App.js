@@ -14,12 +14,10 @@ export default function App() {
     const [category, setCategory] = useState("전체보기");
 
     useEffect(() => {
-        // Firebase 인증 상태 변경 이벤트 리스너
         const unsubscribe = auth.onAuthStateChanged((user) => {
             setUser(user);
         });
 
-        // 컴포넌트 언마운트 시 이벤트 리스너 제거
         return () => unsubscribe();
     }, []);
 
@@ -40,7 +38,7 @@ export default function App() {
         <S.AppContainer>
             <NavBar
                 onSearch={handleSearch}
-                auth={user !== null}
+                user={user}
                 onLogout={handleLogout}
                 onSelect={handleCategory}
             />
@@ -58,7 +56,7 @@ export default function App() {
                 <Route path="/login" element={<Loginpage />} />
                 <Route
                     path="/product/:id"
-                    element={<PrivateRoute auth={user !== null} />}
+                    element={<PrivateRoute user={user} />}
                 />
             </Routes>
         </S.AppContainer>
