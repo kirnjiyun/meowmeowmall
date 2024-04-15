@@ -1,35 +1,49 @@
 import React, { useEffect, useState } from "react";
 import { Routes, Route, Navigate } from "react-router-dom";
 import ProductAll from "./pages/ProductAll";
+import SignUpPage from "./pages/SignUpPage";
 import Loginpage from "./pages/Loginpage";
 import NavBar from "./components/NavBar";
 import * as S from "./app.styled.js";
 import PrivateRoute from "./route/PrivateRoute.jsx";
+import { auth } from "./firebase"; // Firebase 설정 파일에서 auth 객체 가져오기
 
 export default function App() {
-    const [auth, setAuth] = useState(false);
+    const [user, setUser] = useState(null);
     const [searchQuery, setSearchQuery] = useState("");
     const [category, setCategory] = useState("전체보기");
+
+    useEffect(() => {
+        // Firebase 인증 상태 변경 이벤트 리스너
+        const unsubscribe = auth.onAuthStateChanged((user) => {
+            setUser(user);
+        });
+
+        // 컴포넌트 언마운트 시 이벤트 리스너 제거
+        return () => unsubscribe();
+    }, []);
 
     const handleSearch = (keyword) => {
         setSearchQuery(keyword);
     };
+
     const handleLogout = () => {
-        setAuth(false);
+        auth.signOut(); // Firebase 로그아웃 메서드 호출
     };
+
     const handleCategory = (type) => {
         setCategory(type);
         console.log("앱으로 올라온", type);
     };
+
     return (
         <S.AppContainer>
             <NavBar
                 onSearch={handleSearch}
-                auth={auth}
+                auth={user !== null}
                 onLogout={handleLogout}
                 onSelect={handleCategory}
             />
-
             <Routes>
                 <Route
                     path="/"
@@ -40,13 +54,11 @@ export default function App() {
                         />
                     }
                 />
-                <Route
-                    path="/login"
-                    element={<Loginpage setAuth={setAuth} />}
-                />
+                <Route path="/signup" element={<SignUpPage />} />
+                <Route path="/login" element={<Loginpage />} />
                 <Route
                     path="/product/:id"
-                    element={<PrivateRoute auth={auth} />}
+                    element={<PrivateRoute auth={user !== null} />}
                 />
             </Routes>
         </S.AppContainer>

@@ -1,9 +1,10 @@
 import React, { useState } from "react";
 import * as S from "./signUp.styled";
 import { useNavigate } from "react-router-dom";
-import { auth } from "../firebase";
+import { createUserWithEmailAndPassword } from "firebase/auth";
+import { auth } from "../../firebase";
 
-export default function SignUp({ setAuth }) {
+export default function SignUp() {
     const navigate = useNavigate();
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
@@ -16,8 +17,7 @@ export default function SignUp({ setAuth }) {
             return;
         }
         try {
-            await auth.createUserWithEmailAndPassword(email, password);
-            setAuth(true);
+            await createUserWithEmailAndPassword(auth, email, password);
             navigate("/");
         } catch (error) {
             console.error("회원가입 실패:", error);

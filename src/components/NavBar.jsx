@@ -4,7 +4,7 @@ import Logo from "../images/meowmeow.svg";
 import * as S from "./navBar.styled";
 import SearchIcon from "../images/icon-search.svg";
 import { useNavigate, useLocation } from "react-router-dom";
-export default function NavBar({ onSearch, auth, onLogout, onSelect }) {
+export default function NavBar({ onSearch, user, onLogout, onSelect }) {
     const menuList = ["전체보기", "인형", "키링", "의류", "디지털"];
     const navigate = useNavigate();
     const location = useLocation();
@@ -85,7 +85,7 @@ export default function NavBar({ onSearch, auth, onLogout, onSelect }) {
     return (
         <S.NavBarLayout>
             <S.Div1>
-                {auth ? (
+                {user ? (
                     <S.Button onClick={onLogout}>
                         <S.Img src={UserIcon} alt="User Icon" />
                         <S.Content>로그아웃</S.Content>
